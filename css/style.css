@@ -38,12 +38,12 @@ body {
 
 /*header====================================*/
 .header {
-    margin-bottom: 20px;
-    padding: 3px;
+    padding: 0;
     text-align: center;
 }
 
 .header__title {
+    margin: 10px 0;
     font-size: 36px;
     font-weight: 700;
     text-transform: uppercase;
@@ -95,11 +95,13 @@ body {
     margin-bottom: 20px;
     max-width: 465px;
     display: flex;
+    justify-content: center;
     flex-wrap: wrap;
     gap: 0.6em;
     text-align: center;
 
 }
+
 
 .game__cards {
     display: flex;
@@ -144,7 +146,7 @@ body {
 }
 
 .game__card:hover {
-    transform: scale(1.1);
+    transform: scale(0.9);
 }
 
 .game__card:nth-child(4n) {
@@ -181,9 +183,11 @@ body {
 }
 
 .game__timer {
-    position: absolute;
-    top: 0;
-    right: 5%;
+    position: relative;
+    padding-top: 5px;
+    margin-bottom: 15px;
+    text-align: center;
+    z-index: 2;
 }
 .game__resault {
     position: absolute;
@@ -214,4 +218,27 @@ body {
 .footer {
     text-align: center;
 
+}
+
+@media (max-width: 500px) {
+    .game__card {
+        width: 80px;
+        height: 80px;
+    }
+}
+@media (max-width: 400px) {
+    .header__title {
+        font-size: 24px;
+    }
+    .game__timer {
+        font-size: 16px;
+    }
+
+    .game-section__container {
+        gap: 5px;
+    }
+    .game__card {
+        width: 70px;
+        height: 70px;
+    }
 }

@@ -4,6 +4,7 @@
         const restartBtn = document.querySelector('.btn');
         const gameSection = document.querySelector('.game-section__container');
         const result = document.querySelector('.game__resault');
+        
         const items = [
             { name: "1", image: "card1.jpg"},
             { name: "2", image: "card2.jpg"},
@@ -50,9 +51,11 @@
             createNumbersArray();
             let arr = [];
             let winCount = 0;
-            interval = setInterval(timeGenerator, 1000);
+            
             shuffle(arr);
-
+            let delay = setTimeout(() => {
+                interval = setInterval(timeGenerator, 1000);
+            }, 3000);
             tempArray = [...tempArray, ...tempArray];
             for(const el of cardValues) {
               arr.push(tempArray[el - 1])
@@ -61,7 +64,7 @@
 
             for(let i = 0; i < size * size; i++){
                 gameSection.innerHTML  +=`
-                <div data-card-value="${arr[i].name}"class="game__card">
+                <div data-card-value="${arr[i].name}"class="game__card flipped">
                     <div class="card-before"><img src="./img/card-avers.jpg" alt="Карточка"></div>
                     <div class="card-after"><img src="./img/${arr[i].image}" alt="Карточка"></div>
                 </div>`
@@ -69,6 +72,10 @@
 
             const cards = document.querySelectorAll('.game__card');
             cards.forEach((card) => {
+                let delay = setTimeout(() => {
+                    card.classList.remove('flipped');
+                }, 3000);
+
                 card.addEventListener('click', () => {
                     if(!card.classList.contains('matched')) {
                         card.classList.add('flipped');
@@ -114,7 +121,7 @@
             let secondsValue = seconds < 10 ? `0${seconds}` : seconds;
             timeValue.innerHTML = `0:${secondsValue}`;
             seconds -=1;
-            
+
             if(seconds < 0) {
                 result.classList.add('resaul__screen');
                 result.innerHTML = `<h2 class="resault__title">Попробуйте ещё ...</h2>`;
@@ -126,15 +133,17 @@
         }
         
         // Запуск игры
-        startGame();
-
-        //Сброс игры
+        startGame(); 
         restartBtn.addEventListener('click', () => {
+            gameSection.innerHTML = '';
             clearInterval(interval);
-            seconds = 59;
-             startGame();
-        
+            seconds = 60;
+            cardValues = [];
+            winCount = 0;
+            startGame();
+                  
         });
+
     });
     
 })();
