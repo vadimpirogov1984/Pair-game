@@ -135,6 +135,7 @@
         // Запуск игры
         startGame(); 
         restartBtn.addEventListener('click', () => {
+            result.classList.remove('resaul__screen');
             gameSection.innerHTML = '';
             clearInterval(interval);
             seconds = 60;
